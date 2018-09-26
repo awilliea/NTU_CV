@@ -1,0 +1,1337 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Homework2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} origin image}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+        \PY{k+kn}{import} \PY{n+nn}{cv2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} 用來顯示圖片的函數}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+        \PY{k}{def} \PY{n+nf}{show}\PY{p}{(}\PY{n}{img\PYZus{}array}\PY{p}{)}\PY{p}{:}
+            \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{o}{.}\PY{n}{fromarray}\PY{p}{(}\PY{n}{img\PYZus{}array}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{img\PYZus{}array} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lena.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{img\PYZus{}array\PYZus{}g} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lena.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cv2}\PY{o}{.}\PY{n}{IMREAD\PYZus{}GRAYSCALE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{show}\PY{p}{(}\PY{n}{img\PYZus{}array}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} binary image}
+         \PY{n}{img\PYZus{}b\PYZus{}array} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{img\PYZus{}array\PYZus{}g}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{dtype} \PY{o}{=} \PY{n}{img\PYZus{}array}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{img\PYZus{}array\PYZus{}g}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{img\PYZus{}array\PYZus{}g}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{img\PYZus{}array\PYZus{}g}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{128}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+         \PY{n}{show}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} histogram}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{pixel\PYZus{}count} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{]}
+         \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{img\PYZus{}array}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{pixel\PYZus{}count}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Histogram of lena}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h(m)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{pixel\PYZus{}count}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} [<matplotlib.lines.Line2D at 0x22c4a7ed908>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{def} \PY{n+nf}{update\PYZus{}label\PYZus{}8connected}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{n}{row\PYZus{}num}\PY{p}{,}\PY{n}{col\PYZus{}num}\PY{p}{,}\PY{n}{img\PYZus{}label}\PY{p}{)}\PY{p}{:}
+             \PY{n}{label} \PY{o}{=} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}
+             \PY{n}{compare\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{label}\PY{p}{]}
+             \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{)}
+                 
+                 \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{\PYZlt{}} \PY{n}{col\PYZus{}num} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                     
+             \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{\PYZlt{}} \PY{n}{row\PYZus{}num} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{)}
+                 
+                 \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{\PYZlt{}} \PY{n}{col\PYZus{}num} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                     
+             \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{\PYZlt{}} \PY{n}{col\PYZus{}num} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n+nb}{min}\PY{p}{(}\PY{n}{compare\PYZus{}list}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} iterative algo}
+         \PY{k}{def} \PY{n+nf}{update\PYZus{}label\PYZus{}4connected}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{n}{row\PYZus{}num}\PY{p}{,}\PY{n}{col\PYZus{}num}\PY{p}{,}\PY{n}{img\PYZus{}label}\PY{p}{)}\PY{p}{:}
+             \PY{n}{label} \PY{o}{=} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}
+             \PY{n}{compare\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{label}\PY{p}{]}
+             \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{\PYZlt{}} \PY{n}{row\PYZus{}num} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n}{c} \PY{o}{\PYZlt{}} \PY{n}{col\PYZus{}num} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{compare\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n+nb}{min}\PY{p}{(}\PY{n}{compare\PYZus{}list}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{iterative\PYZus{}algo}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{)}\PY{p}{:}
+             \PY{n}{row\PYZus{}num}\PY{p}{,}\PY{n}{col\PYZus{}num} \PY{o}{=} \PY{n}{img\PYZus{}b\PYZus{}array}\PY{o}{.}\PY{n}{shape}
+             \PY{n}{global\PYZus{}label} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{c+c1}{\PYZsh{} initialize}
+             \PY{n}{img\PYZus{}label} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{col\PYZus{}num}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{global\PYZus{}label} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                         \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{global\PYZus{}label}
+             
+             \PY{c+c1}{\PYZsh{} calculate components}
+             \PY{n}{change} \PY{o}{=} \PY{k+kc}{True}
+             \PY{n}{run} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{while}\PY{p}{(}\PY{n}{change} \PY{o}{==} \PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{change} \PY{o}{=} \PY{k+kc}{False}
+                 \PY{n}{run} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{c+c1}{\PYZsh{} Top down}
+                 \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{col\PYZus{}num}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{m} \PY{o}{=} \PY{n}{update\PYZus{}label\PYZus{}4connected}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{n}{row\PYZus{}num}\PY{p}{,}\PY{n}{col\PYZus{}num}\PY{p}{,}\PY{n}{img\PYZus{}label}\PY{p}{)}
+                             \PY{k}{if} \PY{p}{(}\PY{n}{m} \PY{o}{!=} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                                 \PY{n}{change} \PY{o}{=} \PY{k+kc}{True}
+                             \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{m}
+                 \PY{c+c1}{\PYZsh{} bottom up}
+                 \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{col\PYZus{}num}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{m} \PY{o}{=} \PY{n}{update\PYZus{}label\PYZus{}4connected}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{n}{row\PYZus{}num}\PY{p}{,}\PY{n}{col\PYZus{}num}\PY{p}{,}\PY{n}{img\PYZus{}label}\PY{p}{)}
+                             \PY{k}{if} \PY{p}{(}\PY{n}{m} \PY{o}{!=} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                                 \PY{n}{change} \PY{o}{=} \PY{k+kc}{True}
+                             \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{m}
+             \PY{k}{return} \PY{n}{img\PYZus{}label}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{img\PYZus{}label} \PY{o}{=} \PY{n}{iterative\PYZus{}algo}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{def} \PY{n+nf}{caculate\PYZus{}labeldic\PYZus{}and\PYZus{}importantlabel}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{,}\PY{n}{threshold}\PY{p}{)}\PY{p}{:}
+             \PY{n}{label\PYZus{}dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o+ow}{in} \PY{n}{label\PYZus{}dic}\PY{p}{:}
+                         \PY{n}{label\PYZus{}dic}\PY{p}{[}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{label\PYZus{}dic}\PY{p}{[}\PY{n}{img\PYZus{}label}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+             \PY{n}{important\PYZus{}label} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{label\PYZus{}dic}\PY{p}{:}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{label\PYZus{}dic}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{threshold} \PY{o+ow}{and} \PY{n}{key} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{important\PYZus{}label}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{key}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{label\PYZus{}dic}\PY{p}{,}\PY{n}{important\PYZus{}label}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{label\PYZus{}dic}\PY{p}{,}\PY{n}{important\PYZus{}label} \PY{o}{=} \PY{n}{caculate\PYZus{}labeldic\PYZus{}and\PYZus{}importantlabel}\PY{p}{(}\PY{n}{img\PYZus{}label}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{label\PYZus{}dic}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{important\PYZus{}label}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{1.0: 18362, 0.0: 128184, 62.0: 10, 64.0: 71, 73.0: 106045, 213.0: 256, 220.0: 5, 222.0: 5, 223.0: 5, 322.0: 5, 323.0: 5, 324.0: 5, 325.0: 5, 326.0: 6, 327.0: 46, 1731.0: 1, 1883.0: 1, 1983.0: 1, 1984.0: 1, 1985.0: 1, 2052.0: 1, 2187.0: 2, 2199.0: 1, 2298.0: 1, 2299.0: 2, 2362.0: 1, 2363.0: 1, 2364.0: 1, 2516.0: 1, 2517.0: 2, 2616.0: 1, 2617.0: 6, 2620.0: 6, 2624.0: 4, 2686.0: 1, 2687.0: 6, 2820.0: 1, 2832.0: 1, 2935.0: 1, 2938.0: 282, 3084.0: 1, 3127.0: 1, 3237.0: 1, 3238.0: 1, 3239.0: 1, 3429.0: 1, 3434.0: 11, 3549.0: 2, 3617.0: 3, 3620.0: 1, 3769.0: 1, 3936.0: 1, 3939.0: 2, 4084.0: 1, 4184.0: 1, 4185.0: 4, 4187.0: 1, 4402.0: 1, 4505.0: 1, 4571.0: 1, 4572.0: 12, 4718.0: 1, 4817.0: 1, 4886.0: 1, 5213.0: 1, 5214.0: 1, 5473.0: 2, 5548.0: 1, 5689.0: 1, 5806.0: 1, 5807.0: 1, 5879.0: 1, 5880.0: 4, 6009.0: 2, 6019.0: 1, 6132.0: 1, 6133.0: 1, 6134.0: 1, 6135.0: 3, 6210.0: 2, 6313.0: 5, 6354.0: 1, 6355.0: 1, 6356.0: 1, 6368.0: 1, 6676.0: 1, 6683.0: 1, 6684.0: 1, 6685.0: 2, 6788.0: 1, 6861.0: 2, 6862.0: 1, 6863.0: 2, 6950.0: 1, 6987.0: 8, 7180.0: 1, 7268.0: 4, 7310.0: 1, 7574.0: 1, 7575.0: 2, 7612.0: 1, 7719.0: 3, 7793.0: 1, 7858.0: 2, 7860.0: 2, 7861.0: 1, 7862.0: 1, 7869.0: 1, 7870.0: 3, 7898.0: 1, 7905.0: 1, 7907.0: 8, 7908.0: 3, 7909.0: 1, 7910.0: 1, 8093.0: 2, 8100.0: 4, 8158.0: 1, 8183.0: 1, 8189.0: 2, 8190.0: 1, 8191.0: 5, 8199.0: 2, 8201.0: 1, 8378.0: 1, 8379.0: 16, 8432.0: 2, 8434.0: 2, 8442.0: 3, 8443.0: 1, 8475.0: 2, 8477.0: 13, 8582.0: 1, 8651.0: 3, 8707.0: 1, 8712.0: 1, 8715.0: 1, 8716.0: 1, 8736.0: 2, 8741.0: 1, 8852.0: 1, 8921.0: 2, 8981.0: 2, 8988.0: 2, 8990.0: 1, 9021.0: 1, 9130.0: 2, 9199.0: 1, 9201.0: 1, 9254.0: 2, 9255.0: 3, 9291.0: 4, 9294.0: 24, 9296.0: 1, 9470.0: 1, 9471.0: 1, 9472.0: 1, 9524.0: 1, 9532.0: 2, 9567.0: 2, 9568.0: 1, 9683.0: 1, 9684.0: 1, 9752.0: 1, 9753.0: 14, 9756.0: 1, 9758.0: 19, 9759.0: 3, 9835.0: 2, 9838.0: 1, 9839.0: 1, 10071.0: 1, 10072.0: 1, 10073.0: 1, 10098.0: 13, 10102.0: 1, 10210.0: 1, 10277.0: 1, 10278.0: 1, 10279.0: 1, 10332.0: 1, 10333.0: 1, 10334.0: 1, 10354.0: 3, 10360.0: 1, 10363.0: 1, 10364.0: 13, 10368.0: 1, 10545.0: 1, 10555.0: 1, 10597.0: 5, 10631.0: 1, 10632.0: 2, 10639.0: 1, 10815.0: 1, 10818.0: 1, 10819.0: 1, 10823.0: 4, 10825.0: 1, 10833.0: 19, 10855.0: 2, 10857.0: 3, 10860.0: 1, 10893.0: 1, 10894.0: 1, 10899.0: 6, 11077.0: 1, 11078.0: 1, 11082.0: 1, 11102.0: 1, 11108.0: 1, 11109.0: 1, 11110.0: 1, 11138.0: 1, 11141.0: 1, 11254.0: 1, 11320.0: 1, 11321.0: 2, 11323.0: 1, 11324.0: 1, 11327.0: 1, 11359.0: 1, 11360.0: 1, 11381.0: 1, 11396.0: 1, 11507.0: 1, 11575.0: 1, 11576.0: 1, 11578.0: 1, 11579.0: 2, 11604.0: 12, 11605.0: 1, 11620.0: 1, 11630.0: 7, 11809.0: 2, 11812.0: 1, 11813.0: 1, 11846.0: 1, 11848.0: 1, 11849.0: 3, 11850.0: 2, 11874.0: 1, 11875.0: 1, 12051.0: 1, 12053.0: 1, 12054.0: 2, 12055.0: 1, 12063.0: 3, 12084.0: 18, 12087.0: 4, 12089.0: 2, 12099.0: 4, 12101.0: 2, 12108.0: 15, 12110.0: 3, 12113.0: 1, 12114.0: 4, 12115.0: 1, 12291.0: 1, 12292.0: 1, 12293.0: 2, 12324.0: 1, 12331.0: 1, 12333.0: 1, 12334.0: 3, 12346.0: 1, 12355.0: 1, 12356.0: 1, 12357.0: 3, 12359.0: 1, 12532.0: 1, 12533.0: 4, 12534.0: 1, 12536.0: 3, 12537.0: 1, 12538.0: 2, 12564.0: 1, 12578.0: 1, 12591.0: 16, 12601.0: 11, 12602.0: 1, 12605.0: 1, 12815.0: 1, 12820.0: 1, 12826.0: 1, 12848.0: 1, 12851.0: 1, 13024.0: 1, 13027.0: 1, 13072.0: 1, 13091.0: 4, 13095.0: 2, 13096.0: 4, 13097.0: 1, 13272.0: 1, 13273.0: 1, 13274.0: 1, 13275.0: 5, 13327.0: 1, 13329.0: 2, 13330.0: 4, 13344.0: 6, 13347.0: 1, 13348.0: 1, 13461.0: 1, 13522.0: 1, 13523.0: 2, 13552.0: 5, 13553.0: 3, 13561.0: 1, 13562.0: 1, 13596.0: 1, 13610.0: 1, 13789.0: 1, 13790.0: 1, 13816.0: 4, 13861.0: 1, 14052.0: 2, 14053.0: 1, 14054.0: 1, 14055.0: 1, 14068.0: 7, 14069.0: 1, 14079.0: 8, 14137.0: 1, 14151.0: 12, 14154.0: 1, 14155.0: 2, 14159.0: 1, 14335.0: 1, 14336.0: 1, 14337.0: 3, 14423.0: 1, 14424.0: 1, 14437.0: 1, 14438.0: 1, 14616.0: 9, 14617.0: 1, 14618.0: 1, 14729.0: 1, 14846.0: 1, 14910.0: 1, 14911.0: 2, 14927.0: 1, 14936.0: 1, 14937.0: 1, 15014.0: 6, 15017.0: 1, 15018.0: 1, 15198.0: 1, 15216.0: 1, 15217.0: 6, 15224.0: 1, 15301.0: 1, 15303.0: 2, 15481.0: 1, 15484.0: 1, 15502.0: 3, 15585.0: 1, 15589.0: 7, 15773.0: 1, 15875.0: 1, 15876.0: 1, 15881.0: 1, 16059.0: 2, 16065.0: 4, 16162.0: 10, 16166.0: 1, 16167.0: 1, 16344.0: 2, 16347.0: 1, 16353.0: 19, 16363.0: 1, 16364.0: 2, 16604.0: 1, 16638.0: 1, 16740.0: 2, 16914.0: 1, 16915.0: 1, 16916.0: 1, 16924.0: 1, 17022.0: 1, 17023.0: 1, 17197.0: 1, 17198.0: 1, 17474.0: 2, 17475.0: 2, 17476.0: 3, 17750.0: 2, 17753.0: 2, 17758.0: 24, 18027.0: 1, 18043.0: 1, 18301.0: 1, 18302.0: 1, 18303.0: 1, 18571.0: 3, 18578.0: 1, 18840.0: 1, 18841.0: 2, 18846.0: 1, 18937.0: 1, 19105.0: 3, 19107.0: 1, 19373.0: 1, 19377.0: 1, 19378.0: 5, 19384.0: 1, 19635.0: 3, 19641.0: 1, 19893.0: 1, 19894.0: 5, 19899.0: 1, 20158.0: 1, 20162.0: 1, 20163.0: 35, 20681.0: 4, 21191.0: 7, 21446.0: 1, 21698.0: 1, 21699.0: 7, 21948.0: 2, 22205.0: 1, 22454.0: 1, 22698.0: 1, 22699.0: 1, 22703.0: 1, 22943.0: 1, 22946.0: 1, 22947.0: 2, 22952.0: 2, 23192.0: 1, 23193.0: 2, 23427.0: 1, 23428.0: 8, 23429.0: 1, 23907.0: 1, 23910.0: 1, 23911.0: 1, 23912.0: 2, 24152.0: 1, 24642.0: 1, 24643.0: 8, 24645.0: 1, 24646.0: 1, 24647.0: 1, 24888.0: 1, 24889.0: 1, 25129.0: 5, 25368.0: 1, 25370.0: 1, 25371.0: 10, 25611.0: 1, 25855.0: 1, 26099.0: 2048, 26252.0: 1, 26345.0: 1, 26590.0: 1, 26837.0: 1, 26838.0: 1, 27086.0: 1, 27584.0: 1, 27588.0: 1, 29139.0: 1, 29396.0: 4, 29906.0: 1, 30154.0: 1, 30185.0: 6, 30407.0: 1, 30408.0: 1, 30665.0: 2, 30926.0: 2, 30957.0: 1, 31218.0: 2, 31360.0: 1, 31455.0: 1, 31993.0: 1, 32261.0: 1, 32536.0: 1, 32558.0: 2, 32836.0: 3, 33400.0: 3, 33680.0: 1, 33689.0: 1, 33973.0: 1, 34252.0: 4, 34258.0: 2, 34549.0: 1, 34847.0: 3, 35146.0: 1, 35147.0: 1, 35447.0: 1, 35448.0: 1, 35458.0: 1, 35754.0: 4, 35757.0: 1, 36071.0: 1, 36700.0: 2, 36702.0: 3, 36703.0: 8, 37017.0: 1, 37024.0: 2, 37336.0: 5, 37980.0: 1, 38302.0: 2, 38303.0: 6, 38957.0: 2, 38959.0: 1, 39943.0: 1, 39944.0: 1, 39945.0: 1, 40279.0: 1, 40612.0: 1, 40613.0: 1, 40614.0: 2, 40952.0: 5, 41626.0: 3, 41968.0: 3, 42313.0: 1, 42659.0: 1, 43007.0: 8, 43008.0: 1, 43711.0: 3, 46945.0: 4, 48027.0: 2, 49138.0: 3, 49552.0: 118, 49851.0: 2, 50572.0: 120, 50852.0: 1, 50854.0: 4, 50934.0: 1, 51251.0: 2, 51489.0: 1, 52375.0: 1, 52654.0: 1, 52655.0: 2, 52704.0: 1, 52970.0: 1, 52974.0: 1, 53198.0: 3, 53242.0: 6, 53245.0: 7, 53250.0: 1, 53511.0: 1, 53993.0: 3, 54033.0: 3, 54034.0: 1, 54035.0: 1, 54303.0: 1, 54304.0: 1, 54305.0: 1, 54538.0: 3, 54563.0: 1, 54564.0: 1, 54565.0: 1, 54826.0: 1, 54827.0: 1, 55066.0: 1, 55093.0: 1, 55094.0: 1, 55095.0: 1, 55338.0: 1, 55362.0: 4, 55600.0: 24, 55601.0: 1, 55626.0: 1, 55870.0: 1, 55871.0: 1, 55894.0: 1, 55895.0: 1, 56161.0: 1, 56344.0: 1, 56412.0: 2, 56437.0: 1, 56680.0: 1, 56702.0: 3, 56945.0: 1, 56946.0: 7, 56950.0: 71, 56958.0: 1, 57219.0: 1, 57717.0: 3, 57719.0: 4, 57730.0: 1, 57731.0: 2, 57977.0: 1, 58047.0: 2, 58215.0: 3, 58216.0: 48, 58229.0: 11, 58539.0: 2, 58937.0: 1, 58942.0: 1, 58943.0: 1, 58948.0: 3, 58951.0: 2, 59421.0: 1, 59424.0: 14, 59648.0: 5, 59655.0: 1, 59656.0: 1, 59729.0: 1, 59875.0: 5, 59883.0: 98, 59959.0: 1, 60190.0: 1, 60424.0: 1, 60442.0: 1, 60795.0: 1, 60796.0: 2, 61251.0: 1, 61252.0: 1, 61480.0: 1, 61490.0: 1, 61706.0: 2, 61707.0: 1, 61717.0: 2, 61718.0: 1, 61814.0: 1, 62178.0: 2, 62179.0: 28, 62412.0: 66, 62635.0: 15, 62874.0: 1, 63340.0: 44, 63813.0: 13, 64802.0: 3, 65299.0: 98, 65792.0: 3, 66318.0: 1, 66809.0: 644, 67080.0: 1, 67581.0: 20, 67590.0: 6, 67591.0: 69, 67848.0: 10, 68625.0: 47, 68630.0: 1, 69376.0: 1, 69648.0: 85, 69846.0: 1, 69860.0: 1, 70350.0: 3, 70593.0: 1, 70642.0: 4, 70681.0: 4, 71300.0: 1, 71366.0: 2, 71532.0: 1, 71561.0: 1, 71562.0: 35, 71989.0: 4, 72674.0: 1, 72675.0: 5, 72676.0: 4, 72901.0: 1, 73126.0: 1, 73357.0: 1, 73415.0: 4, 73812.0: 15, 73813.0: 20, 73814.0: 2, 73848.0: 1, 74686.0: 1, 74892.0: 1, 74909.0: 92, 75620.0: 5, 76145.0: 2, 76210.0: 1, 76411.0: 1, 76668.0: 21, 76672.0: 3, 76927.0: 1, 77191.0: 14, 77581.0: 2, 78299.0: 1, 78565.0: 9, 78566.0: 19, 79111.0: 1, 79113.0: 1, 79135.0: 1, 79389.0: 98, 79396.0: 2, 79397.0: 1, 79398.0: 1, 79399.0: 1, 79678.0: 1, 80250.0: 1, 80254.0: 23, 80540.0: 4, 80829.0: 1, 80830.0: 118, 80833.0: 2, 81139.0: 1, 81242.0: 2, 81401.0: 1, 81800.0: 1, 82243.0: 33, 82801.0: 1, 83080.0: 72, 83084.0: 1, 83167.0: 1, 83367.0: 1, 83651.0: 5, 83731.0: 1, 83936.0: 13, 83938.0: 3, 83944.0: 42, 84026.0: 1, 84316.0: 1, 84352.0: 1, 84817.0: 6, 85105.0: 3, 85396.0: 3, 85402.0: 1, 85687.0: 1, 85703.0: 3, 86235.0: 12, 86237.0: 3, 86240.0: 16, 86778.0: 1, 86787.0: 3, 86791.0: 1, 86799.0: 1, 87049.0: 1, 87050.0: 2, 87057.0: 1, 87590.0: 10, 87593.0: 19, 87594.0: 4, 87599.0: 42, 87600.0: 5, 87618.0: 1, 87876.0: 1, 87901.0: 2, 88437.0: 1, 88454.0: 1, 88975.0: 1, 88976.0: 4, 88979.0: 1, 88984.0: 7, 90039.0: 1, 90300.0: 2, 90304.0: 19, 90306.0: 1, 90317.0: 1, 90318.0: 1, 90835.0: 1, 90836.0: 2, 91387.0: 5, 91692.0: 1, 91980.0: 1, 92244.0: 3, 92266.0: 1, 92552.0: 1, 92823.0: 7, 92845.0: 3, 93400.0: 1, 93684.0: 28, 93959.0: 6, 93964.0: 2, 94525.0: 7, 94543.0: 1, 94546.0: 1, 95116.0: 1, 95658.0: 75, 95935.0: 1, 95939.0: 13, 96450.0: 163, 96475.0: 3, 96577.0: 1, 96912.0: 5, 97398.0: 1, 97674.0: 3, 97909.0: 1, 98168.0: 1, 98169.0: 1, 98194.0: 2, 98195.0: 7, 98668.0: 16, 98934.0: 1, 99191.0: 37, 99192.0: 3, 99211.0: 1, 99449.0: 1, 99469.0: 2, 99498.0: 1, 99704.0: 23, 99964.0: 4, 100266.0: 1, 100938.0: 1, 101189.0: 7, 101434.0: 1, 101439.0: 3, 101441.0: 1, 101686.0: 1, 101691.0: 1, 101930.0: 1, 102173.0: 14, 102877.0: 1, 102878.0: 15, 102879.0: 1, 103015.0: 1, 103111.0: 1, 103114.0: 2, 103247.0: 1, 103344.0: 1, 103354.0: 1, 103477.0: 2, 103574.0: 1, 103581.0: 32, 103806.0: 2, 105036.0: 1, 105127.0: 11, 105247.0: 1, 105340.0: 7, 105743.0: 58, 106061.0: 1, 106357.0: 18, 106535.0: 1, 106545.0: 3, 106725.0: 1, 106728.0: 28, 106732.0: 2, 106914.0: 26, 107118.0: 1, 107467.0: 4, 107770.0: 1490, 107809.0: 2, 107814.0: 1, 107815.0: 3, 107913.0: 1, 108291.0: 1, 108366.0: 1, 108367.0: 19, 108374.0: 1, 108390.0: 1, 108585.0: 1, 108588.0: 1, 108783.0: 1, 108793.0: 2, 108989.0: 4, 108991.0: 1, 109195.0: 3, 109213.0: 7, 109428.0: 10, 109429.0: 1, 109655.0: 2, 109901.0: 5, 110353.0: 9, 110511.0: 2, 110543.0: 2, 110855.0: 1, 111030.0: 1, 111485.0: 19, 112068.0: 1, 112080.0: 1, 112577.0: 2, 113090.0: 1, 113091.0: 30, 114030.0: 2, 114032.0: 1, 114362.0: 4, 114540.0: 1, 114799.0: 1, 115054.0: 1, 115828.0: 3, 115929.0: 1, 116088.0: 1, 116177.0: 1, 116196.0: 1, 116442.0: 3, 116624.0: 6, 116728.0: 1, 117224.0: 1, 117481.0: 2, 117498.0: 1, 117739.0: 1, 117756.0: 3, 117922.0: 3, 118008.0: 1, 118019.0: 1, 118283.0: 1, 118534.0: 57, 118544.0: 1, 118802.0: 2, 118803.0: 37, 118971.0: 2, 119062.0: 7, 119235.0: 1, 119577.0: 1, 119578.0: 4, 120088.0: 1, 120224.0: 1, 120355.0: 1, 120611.0: 5, 121137.0: 9, 121139.0: 4, 121408.0: 4, 121675.0: 1, 121677.0: 1, 121681.0: 1, 121682.0: 1, 121940.0: 9, 121941.0: 1, 122199.0: 2, 122206.0: 1, 122709.0: 3, 123195.0: 1, 123432.0: 86, 123434.0: 1, 123887.0: 5, 124111.0: 1, 124762.0: 2, 124763.0: 2, 124767.0: 3, 124984.0: 1, 125197.0: 2, 125833.0: 9, 126055.0: 1, 126275.0: 3, 126922.0: 1, 126928.0: 1, 127145.0: 1, 127146.0: 1, 127780.0: 5, 128201.0: 25, 128410.0: 1, 128413.0: 1, 128829.0: 1, 129030.0: 1, 129233.0: 4, 129439.0: 1, 129445.0: 1, 129846.0: 2, 129850.0: 2, 129852.0: 2, 130056.0: 2, 130256.0: 1, 130449.0: 1, 130450.0: 4, 130644.0: 4, 130837.0: 1, 130838.0: 1, 131031.0: 24, 131033.0: 1, 131034.0: 3, 131235.0: 1, 131437.0: 2, 131598.0: 1, 131638.0: 17, 131641.0: 1, 131848.0: 1, 131849.0: 1, 131851.0: 1, 132050.0: 1, 132054.0: 9, 132418.0: 1, 132465.0: 1, 132469.0: 2, 132628.0: 2, 132629.0: 1, 132676.0: 1, 132677.0: 6, 132680.0: 1, 132839.0: 1, 132840.0: 40, 132843.0: 17, 132845.0: 1, 132890.0: 2, 132893.0: 1, 133056.0: 19, 133106.0: 2, 133111.0: 1, 133327.0: 3, 133328.0: 1, 133329.0: 4, 133331.0: 6, 133504.0: 1, 133547.0: 2, 133549.0: 8, 133719.0: 2, 133729.0: 2\}
+[1.0, 73.0, 26099.0, 66809.0, 107770.0]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{bounding\PYZus{}rows} \PY{o}{=} \PY{p}{[}\PY{p}{]} 
+         \PY{n}{bounding\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{centers} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{important\PYZus{}label}\PY{p}{:}
+             \PY{n}{center} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             
+             \PY{n}{up} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{down} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{boxes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{n}{tmp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{img\PYZus{}label} \PY{o}{==} \PY{n}{i}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{value} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{tmp}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{up} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{value} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{boxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+                     \PY{n}{up} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{up} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{value} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{boxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+                     \PY{k}{break}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{index} \PY{o}{==} \PY{n}{tmp}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{p}{)}\PY{p}{:}
+                     \PY{n}{boxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}        
+                 \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{index}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{value}
+                 
+             \PY{n}{bounding\PYZus{}rows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{boxes}\PY{p}{)}
+             \PY{n}{center}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{count}\PY{o}{/}\PY{n}{tmp}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{up} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{down} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{boxes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{n}{tmp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{img\PYZus{}label} \PY{o}{==} \PY{n}{i}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{value} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{tmp}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{up} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{value} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{boxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+                     \PY{n}{up} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{up} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{value} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{boxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+                     \PY{k}{break}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{index} \PY{o}{==} \PY{n}{tmp}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{p}{)}\PY{p}{:}
+                     \PY{n}{boxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+                 \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{index}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{value}
+                     
+             \PY{n}{bounding\PYZus{}cols}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{boxes}\PY{p}{)}
+             \PY{n}{center}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{count}\PY{o}{/}\PY{n}{tmp}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{centers}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{center}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{centers}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:} [[230, 43], [246, 345], [176, 133], [265, 117], [458, 18]]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{bounding\PYZus{}rows}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} [[0, 511], [0, 511], [94, 238], [237, 288], [399, 511]]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{bounding\PYZus{}cols}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} [[0, 88], [127, 511], [118, 158], [89, 140], [0, 32]]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{img\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{img\PYZus{}array}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{important\PYZus{}label}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{512}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{==} \PY{n}{bounding\PYZus{}rows}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{or} \PY{n}{l}\PY{o}{==} \PY{n}{bounding\PYZus{}rows}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{512}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if}\PY{p}{(}\PY{n}{c} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{bounding\PYZus{}cols}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{and} \PY{n}{c} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{bounding\PYZus{}cols}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                             \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                             \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+                         
+                 \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{bounding\PYZus{}rows}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{and} \PY{n}{l}\PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{bounding\PYZus{}rows}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{512}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if}\PY{p}{(}\PY{n}{c} \PY{o}{==} \PY{n}{bounding\PYZus{}cols}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{or} \PY{n}{c} \PY{o}{==} \PY{n}{bounding\PYZus{}cols}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                             \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                             \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+                 
+                 \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{==} \PY{n}{centers}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{512}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if}\PY{p}{(}\PY{n}{c} \PY{o}{==} \PY{n}{centers}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                             \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                                 \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+                                 \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                                 \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                                 
+                                 \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+                                 \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                                 \PY{n}{img\PYZus{}test}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{n}{c}\PY{o}{+}\PY{n}{t}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{show}\PY{p}{(}\PY{n}{img\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Caculate components}
+        \PY{c+c1}{\PYZsh{} efficient run\PYZus{}path algo}
+        \PY{k}{def} \PY{n+nf}{construct\PYZus{}runtable\PYZus{}and\PYZus{}rowtable}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{)}\PY{p}{:}
+            \PY{n}{run\PYZus{}table} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{row\PYZus{}table} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{row\PYZus{}num}\PY{p}{,}\PY{n}{col\PYZus{}num} \PY{o}{=} \PY{n}{img\PYZus{}b\PYZus{}array}\PY{o}{.}\PY{n}{shape}
+            \PY{n}{run\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{p}{)}\PY{p}{:}
+                \PY{n}{row\PYZus{}run} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                \PY{n}{row\PYZus{}run}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}start}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{run\PYZus{}num}
+                \PY{n}{row\PYZus{}run\PYZus{}num}  \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{while} \PY{p}{(}\PY{n}{j} \PY{o}{\PYZlt{}} \PY{n}{col\PYZus{}num}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{j} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{row\PYZus{}run\PYZus{}num} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        
+                        \PY{c+c1}{\PYZsh{} record run}
+                        \PY{n}{run} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                        \PY{n}{run}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{i}
+                        \PY{n}{run}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{j}
+                        \PY{n}{run}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+        
+                        \PY{c+c1}{\PYZsh{} record the end\PYZus{}col of the run}
+                        \PY{k}{while} \PY{p}{(}\PY{n}{j} \PY{o}{\PYZlt{}} \PY{n}{col\PYZus{}num} \PY{o+ow}{and} \PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0} \PY{p}{)}\PY{p}{:}
+                            \PY{n}{j} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{n}{run}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{if} \PY{n}{j} \PY{o}{\PYZlt{}} \PY{n}{col\PYZus{}num} \PY{k}{else} \PY{n}{j}
+        
+                        \PY{n}{run\PYZus{}table}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{run}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} record runs of the row }
+                \PY{n}{run\PYZus{}num} \PY{o}{+}\PY{o}{=} \PY{n}{row\PYZus{}run\PYZus{}num}
+                \PY{k}{if} \PY{p}{(}\PY{n}{row\PYZus{}run\PYZus{}num} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{row\PYZus{}run}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n}{row\PYZus{}run}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{row\PYZus{}run}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{run\PYZus{}num} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+        
+                \PY{n}{row\PYZus{}table}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row\PYZus{}run}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{run\PYZus{}table}\PY{p}{,}\PY{n}{row\PYZus{}table}
+        
+        \PY{k}{def} \PY{n+nf}{top\PYZus{}down\PYZus{}pass}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{,}\PY{n}{row\PYZus{}table}\PY{p}{,}\PY{n}{run\PYZus{}table}\PY{p}{)}\PY{p}{:}
+            \PY{n}{row\PYZus{}num}\PY{p}{,}\PY{n}{col\PYZus{}num} \PY{o}{=} \PY{n}{img\PYZus{}b\PYZus{}array}\PY{o}{.}\PY{n}{shape}
+            
+            \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{p}{)}\PY{p}{:}
+                \PY{n}{p} \PY{o}{=} \PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}start}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{plast} \PY{o}{=} \PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}end}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                
+                \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{q}\PY{p}{,}\PY{n}{qlast} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{q}\PY{p}{,}\PY{n}{qlast} \PY{o}{=} \PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}start}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}end}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{} initialize equivalence class}
+                \PY{k}{if} \PY{p}{(}\PY{n}{p} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{q} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{ds} \PY{o}{=} \PY{n}{disjoint\PYZus{}sets}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Scan 1 (for 4\PYZhy{}connected)}
+                \PY{k}{while}\PY{p}{(}\PY{n}{p} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{plast} \PY{o+ow}{and} \PY{n}{q} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{qlast}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} Check whether runs P and Q overlap}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{k}{elif}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{q} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{c+c1}{\PYZsh{} There is some overlap between P and Q}
+                        \PY{n}{plabel} \PY{o}{=} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                        
+                        \PY{c+c1}{\PYZsh{} update label}
+                        \PY{k}{if} \PY{p}{(}\PY{n}{plabel} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                        \PY{k}{elif} \PY{p}{(}\PY{n}{plabel} \PY{o}{!=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{plabel} \PY{o}{!=} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{ds}\PY{o}{.}\PY{n}{union}\PY{p}{(}\PY{n}{plabel}\PY{p}{,}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                        
+                        \PY{c+c1}{\PYZsh{} move P and Q}
+                        \PY{k}{if}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{q} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{k}{elif}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{k}{elif} \PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{q} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1} 
+                            \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{c+c1}{\PYZsh{} Scan 2}
+                \PY{n}{p} \PY{o}{=} \PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}start}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{k}{while}\PY{p}{(}\PY{n}{p} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{plast}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{plabel} \PY{o}{=} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                    
+                    \PY{k}{if}\PY{p}{(}\PY{n}{plabel} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{New\PYZus{}label}\PY{p}{(}\PY{p}{)}
+                    \PY{k}{elif}\PY{p}{(}\PY{n}{plabel} \PY{o}{!=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{Label}\PY{p}{(}\PY{n}{plabel}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{Label}\PY{p}{(}\PY{n}{plabel}\PY{p}{)}
+                        
+                    \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    
+            \PY{k}{return} \PY{n}{run\PYZus{}table}
+        
+        \PY{k}{def} \PY{n+nf}{bottom\PYZus{}up\PYZus{}pass}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{,}\PY{n}{row\PYZus{}table}\PY{p}{,}\PY{n}{run\PYZus{}table}\PY{p}{,}\PY{n}{ds}\PY{p}{)}\PY{p}{:} 
+            \PY{n}{row\PYZus{}num}\PY{p}{,}\PY{n}{col\PYZus{}num} \PY{o}{=} \PY{n}{img\PYZus{}b\PYZus{}array}\PY{o}{.}\PY{n}{shape}
+            
+            \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{row\PYZus{}num}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{p} \PY{o}{=} \PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}start}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{plast} \PY{o}{=} \PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}end}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                
+                \PY{k}{if} \PY{p}{(}\PY{n}{l} \PY{o}{==} \PY{n}{row\PYZus{}num}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{q}\PY{p}{,}\PY{n}{qlast} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{q}\PY{p}{,}\PY{n}{qlast} \PY{o}{=} \PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}start}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}end}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{} initialize equivalence class}
+                \PY{k}{if} \PY{p}{(}\PY{n}{p} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n}{q} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{Initialize\PYZus{}Equiv}\PY{p}{(}\PY{p}{)}    
+                
+                \PY{c+c1}{\PYZsh{} Scan 1 (for 4\PYZhy{}connected)}
+                \PY{k}{while}\PY{p}{(}\PY{n}{p} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{plast} \PY{o+ow}{and} \PY{n}{q} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{qlast}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} Check whether runs P and Q overlap}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{k}{elif}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{q} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{c+c1}{\PYZsh{} There is some overlap between P and Q}
+                        \PY{n}{plabel} \PY{o}{=} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                        
+                        \PY{c+c1}{\PYZsh{} update label}
+                        \PY{k}{if} \PY{p}{(}\PY{n}{plabel} \PY{o}{!=} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{Label}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{=} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                        
+                        \PY{c+c1}{\PYZsh{} move P and Q}
+                        \PY{k}{if}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{q} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{k}{elif}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{k}{elif} \PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{q}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{q} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1} 
+                            \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            
+                \PY{c+c1}{\PYZsh{} Scan 2}
+                \PY{n}{p} \PY{o}{=} \PY{n}{row\PYZus{}table}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row\PYZus{}start}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{k}{while}\PY{p}{(}\PY{n}{p} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{plast}\PY{p}{)}\PY{p}{:}
+                    
+                    \PY{c+c1}{\PYZsh{} replace p\PYZsq{}s label by its class label            }
+                    \PY{k}{if}\PY{p}{(}\PY{n}{Label}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{Label}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{[}\PY{n}{p}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perm\PYZus{}label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                        
+                    \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    
+            \PY{k}{return} \PY{n}{run\PYZus{}table}
+        
+        
+        \PY{k}{def} \PY{n+nf}{Initialize\PYZus{}Equiv}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{)}\PY{p}{:}
+            
+        \PY{k}{def} \PY{n+nf}{make\PYZus{}equivalent}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+        \PY{k}{def} \PY{n+nf}{Label}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+        \PY{k}{def} \PY{n+nf}{New\PYZus{}label}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+        \PY{k}{def} \PY{n+nf}{caculate\PYZus{}components}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{,}\PY{n}{row\PYZus{}table}\PY{p}{,}\PY{n}{run\PYZus{}table}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{class} \PY{n+nc}{disjoint\PYZus{}sets}\PY{p}{:}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{run\PYZus{}table}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{groups} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{heads} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{groups}\PY{p}{)}\PY{p}{]}
+                 
+             \PY{k}{def} \PY{n+nf}{find}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{x} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{heads}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{x}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{heads}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{find}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{heads}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{union}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{x\PYZus{}head} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{y\PYZus{}head} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{x\PYZus{}head} \PY{o}{!=} \PY{n}{y\PYZus{}head}\PY{p}{)}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{heads}\PY{p}{[}\PY{n}{x\PYZus{}head}\PY{p}{]} \PY{o}{=} \PY{n}{y\PYZus{}head}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{groups} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{run\PYZus{}table}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} 7152
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{aa} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{c+c1}{\PYZsh{}.extend([0])}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{aa}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{aa}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} [1, 2, 3, 0, 1, 2, 3]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{run\PYZus{}table}\PY{p}{,}\PY{n}{row\PYZus{}table} \PY{o}{=} \PY{n}{construct\PYZus{}runtable\PYZus{}and\PYZus{}rowtable}\PY{p}{(}\PY{n}{img\PYZus{}b\PYZus{}array}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{row\PYZus{}table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} [\{'row\_start': 0, 'end': 22\},
+         \{'row\_start': 23, 'end': 45\},
+         \{'row\_start': 46, 'end': 68\},
+         \{'row\_start': 69, 'end': 91\},
+         \{'row\_start': 92, 'end': 114\},
+         \{'row\_start': 115, 'end': 137\},
+         \{'row\_start': 138, 'end': 165\},
+         \{'row\_start': 166, 'end': 192\},
+         \{'row\_start': 193, 'end': 224\},
+         \{'row\_start': 225, 'end': 256\},
+         \{'row\_start': 257, 'end': 287\},
+         \{'row\_start': 288, 'end': 314\},
+         \{'row\_start': 315, 'end': 340\},
+         \{'row\_start': 341, 'end': 367\},
+         \{'row\_start': 368, 'end': 395\},
+         \{'row\_start': 396, 'end': 417\},
+         \{'row\_start': 418, 'end': 439\},
+         \{'row\_start': 440, 'end': 463\},
+         \{'row\_start': 464, 'end': 490\},
+         \{'row\_start': 491, 'end': 511\},
+         \{'row\_start': 512, 'end': 538\},
+         \{'row\_start': 539, 'end': 573\},
+         \{'row\_start': 574, 'end': 603\},
+         \{'row\_start': 604, 'end': 635\},
+         \{'row\_start': 636, 'end': 669\},
+         \{'row\_start': 670, 'end': 710\},
+         \{'row\_start': 711, 'end': 748\},
+         \{'row\_start': 749, 'end': 783\},
+         \{'row\_start': 784, 'end': 806\},
+         \{'row\_start': 807, 'end': 838\},
+         \{'row\_start': 839, 'end': 875\},
+         \{'row\_start': 876, 'end': 912\},
+         \{'row\_start': 913, 'end': 943\},
+         \{'row\_start': 944, 'end': 979\},
+         \{'row\_start': 980, 'end': 1007\},
+         \{'row\_start': 1008, 'end': 1047\},
+         \{'row\_start': 1048, 'end': 1089\},
+         \{'row\_start': 1090, 'end': 1117\},
+         \{'row\_start': 1118, 'end': 1148\},
+         \{'row\_start': 1149, 'end': 1180\},
+         \{'row\_start': 1181, 'end': 1217\},
+         \{'row\_start': 1218, 'end': 1255\},
+         \{'row\_start': 1256, 'end': 1292\},
+         \{'row\_start': 1293, 'end': 1323\},
+         \{'row\_start': 1324, 'end': 1355\},
+         \{'row\_start': 1356, 'end': 1387\},
+         \{'row\_start': 1388, 'end': 1411\},
+         \{'row\_start': 1412, 'end': 1433\},
+         \{'row\_start': 1434, 'end': 1462\},
+         \{'row\_start': 1463, 'end': 1484\},
+         \{'row\_start': 1485, 'end': 1499\},
+         \{'row\_start': 1500, 'end': 1525\},
+         \{'row\_start': 1526, 'end': 1546\},
+         \{'row\_start': 1547, 'end': 1570\},
+         \{'row\_start': 1571, 'end': 1588\},
+         \{'row\_start': 1589, 'end': 1605\},
+         \{'row\_start': 1606, 'end': 1623\},
+         \{'row\_start': 1624, 'end': 1639\},
+         \{'row\_start': 1640, 'end': 1653\},
+         \{'row\_start': 1654, 'end': 1665\},
+         \{'row\_start': 1666, 'end': 1676\},
+         \{'row\_start': 1677, 'end': 1692\},
+         \{'row\_start': 1693, 'end': 1705\},
+         \{'row\_start': 1706, 'end': 1717\},
+         \{'row\_start': 1718, 'end': 1726\},
+         \{'row\_start': 1727, 'end': 1737\},
+         \{'row\_start': 1738, 'end': 1747\},
+         \{'row\_start': 1748, 'end': 1758\},
+         \{'row\_start': 1759, 'end': 1769\},
+         \{'row\_start': 1770, 'end': 1782\},
+         \{'row\_start': 1783, 'end': 1795\},
+         \{'row\_start': 1796, 'end': 1803\},
+         \{'row\_start': 1804, 'end': 1813\},
+         \{'row\_start': 1814, 'end': 1823\},
+         \{'row\_start': 1824, 'end': 1837\},
+         \{'row\_start': 1838, 'end': 1850\},
+         \{'row\_start': 1851, 'end': 1861\},
+         \{'row\_start': 1862, 'end': 1874\},
+         \{'row\_start': 1875, 'end': 1886\},
+         \{'row\_start': 1887, 'end': 1899\},
+         \{'row\_start': 1900, 'end': 1913\},
+         \{'row\_start': 1914, 'end': 1930\},
+         \{'row\_start': 1931, 'end': 1943\},
+         \{'row\_start': 1944, 'end': 1957\},
+         \{'row\_start': 1958, 'end': 1966\},
+         \{'row\_start': 1967, 'end': 1981\},
+         \{'row\_start': 1982, 'end': 1991\},
+         \{'row\_start': 1992, 'end': 1999\},
+         \{'row\_start': 2000, 'end': 2013\},
+         \{'row\_start': 2014, 'end': 2025\},
+         \{'row\_start': 2026, 'end': 2034\},
+         \{'row\_start': 2035, 'end': 2046\},
+         \{'row\_start': 2047, 'end': 2056\},
+         \{'row\_start': 2057, 'end': 2063\},
+         \{'row\_start': 2064, 'end': 2073\},
+         \{'row\_start': 2074, 'end': 2084\},
+         \{'row\_start': 2085, 'end': 2093\},
+         \{'row\_start': 2094, 'end': 2107\},
+         \{'row\_start': 2108, 'end': 2119\},
+         \{'row\_start': 2120, 'end': 2129\},
+         \{'row\_start': 2130, 'end': 2140\},
+         \{'row\_start': 2141, 'end': 2150\},
+         \{'row\_start': 2151, 'end': 2158\},
+         \{'row\_start': 2159, 'end': 2169\},
+         \{'row\_start': 2170, 'end': 2178\},
+         \{'row\_start': 2179, 'end': 2186\},
+         \{'row\_start': 2187, 'end': 2198\},
+         \{'row\_start': 2199, 'end': 2211\},
+         \{'row\_start': 2212, 'end': 2223\},
+         \{'row\_start': 2224, 'end': 2236\},
+         \{'row\_start': 2237, 'end': 2249\},
+         \{'row\_start': 2250, 'end': 2261\},
+         \{'row\_start': 2262, 'end': 2273\},
+         \{'row\_start': 2274, 'end': 2284\},
+         \{'row\_start': 2285, 'end': 2296\},
+         \{'row\_start': 2297, 'end': 2305\},
+         \{'row\_start': 2306, 'end': 2313\},
+         \{'row\_start': 2314, 'end': 2324\},
+         \{'row\_start': 2325, 'end': 2334\},
+         \{'row\_start': 2335, 'end': 2347\},
+         \{'row\_start': 2348, 'end': 2358\},
+         \{'row\_start': 2359, 'end': 2369\},
+         \{'row\_start': 2370, 'end': 2380\},
+         \{'row\_start': 2381, 'end': 2391\},
+         \{'row\_start': 2392, 'end': 2400\},
+         \{'row\_start': 2401, 'end': 2411\},
+         \{'row\_start': 2412, 'end': 2422\},
+         \{'row\_start': 2423, 'end': 2431\},
+         \{'row\_start': 2432, 'end': 2442\},
+         \{'row\_start': 2443, 'end': 2453\},
+         \{'row\_start': 2454, 'end': 2461\},
+         \{'row\_start': 2462, 'end': 2469\},
+         \{'row\_start': 2470, 'end': 2477\},
+         \{'row\_start': 2478, 'end': 2487\},
+         \{'row\_start': 2488, 'end': 2497\},
+         \{'row\_start': 2498, 'end': 2506\},
+         \{'row\_start': 2507, 'end': 2512\},
+         \{'row\_start': 2513, 'end': 2518\},
+         \{'row\_start': 2519, 'end': 2525\},
+         \{'row\_start': 2526, 'end': 2532\},
+         \{'row\_start': 2533, 'end': 2540\},
+         \{'row\_start': 2541, 'end': 2546\},
+         \{'row\_start': 2547, 'end': 2551\},
+         \{'row\_start': 2552, 'end': 2560\},
+         \{'row\_start': 2561, 'end': 2566\},
+         \{'row\_start': 2567, 'end': 2574\},
+         \{'row\_start': 2575, 'end': 2580\},
+         \{'row\_start': 2581, 'end': 2586\},
+         \{'row\_start': 2587, 'end': 2593\},
+         \{'row\_start': 2594, 'end': 2602\},
+         \{'row\_start': 2603, 'end': 2609\},
+         \{'row\_start': 2610, 'end': 2616\},
+         \{'row\_start': 2617, 'end': 2623\},
+         \{'row\_start': 2624, 'end': 2629\},
+         \{'row\_start': 2630, 'end': 2636\},
+         \{'row\_start': 2637, 'end': 2642\},
+         \{'row\_start': 2643, 'end': 2647\},
+         \{'row\_start': 2648, 'end': 2653\},
+         \{'row\_start': 2654, 'end': 2659\},
+         \{'row\_start': 2660, 'end': 2665\},
+         \{'row\_start': 2666, 'end': 2671\},
+         \{'row\_start': 2672, 'end': 2679\},
+         \{'row\_start': 2680, 'end': 2687\},
+         \{'row\_start': 2688, 'end': 2696\},
+         \{'row\_start': 2697, 'end': 2706\},
+         \{'row\_start': 2707, 'end': 2715\},
+         \{'row\_start': 2716, 'end': 2725\},
+         \{'row\_start': 2726, 'end': 2733\},
+         \{'row\_start': 2734, 'end': 2745\},
+         \{'row\_start': 2746, 'end': 2757\},
+         \{'row\_start': 2758, 'end': 2771\},
+         \{'row\_start': 2772, 'end': 2785\},
+         \{'row\_start': 2786, 'end': 2800\},
+         \{'row\_start': 2801, 'end': 2814\},
+         \{'row\_start': 2815, 'end': 2832\},
+         \{'row\_start': 2833, 'end': 2849\},
+         \{'row\_start': 2850, 'end': 2866\},
+         \{'row\_start': 2867, 'end': 2879\},
+         \{'row\_start': 2880, 'end': 2893\},
+         \{'row\_start': 2894, 'end': 2909\},
+         \{'row\_start': 2910, 'end': 2927\},
+         \{'row\_start': 2928, 'end': 2942\},
+         \{'row\_start': 2943, 'end': 2958\},
+         \{'row\_start': 2959, 'end': 2973\},
+         \{'row\_start': 2974, 'end': 2986\},
+         \{'row\_start': 2987, 'end': 3001\},
+         \{'row\_start': 3002, 'end': 3018\},
+         \{'row\_start': 3019, 'end': 3035\},
+         \{'row\_start': 3036, 'end': 3051\},
+         \{'row\_start': 3052, 'end': 3069\},
+         \{'row\_start': 3070, 'end': 3083\},
+         \{'row\_start': 3084, 'end': 3100\},
+         \{'row\_start': 3101, 'end': 3119\},
+         \{'row\_start': 3120, 'end': 3134\},
+         \{'row\_start': 3135, 'end': 3150\},
+         \{'row\_start': 3151, 'end': 3166\},
+         \{'row\_start': 3167, 'end': 3181\},
+         \{'row\_start': 3182, 'end': 3195\},
+         \{'row\_start': 3196, 'end': 3209\},
+         \{'row\_start': 3210, 'end': 3225\},
+         \{'row\_start': 3226, 'end': 3240\},
+         \{'row\_start': 3241, 'end': 3255\},
+         \{'row\_start': 3256, 'end': 3270\},
+         \{'row\_start': 3271, 'end': 3283\},
+         \{'row\_start': 3284, 'end': 3300\},
+         \{'row\_start': 3301, 'end': 3313\},
+         \{'row\_start': 3314, 'end': 3330\},
+         \{'row\_start': 3331, 'end': 3348\},
+         \{'row\_start': 3349, 'end': 3365\},
+         \{'row\_start': 3366, 'end': 3378\},
+         \{'row\_start': 3379, 'end': 3391\},
+         \{'row\_start': 3392, 'end': 3402\},
+         \{'row\_start': 3403, 'end': 3413\},
+         \{'row\_start': 3414, 'end': 3423\},
+         \{'row\_start': 3424, 'end': 3435\},
+         \{'row\_start': 3436, 'end': 3445\},
+         \{'row\_start': 3446, 'end': 3457\},
+         \{'row\_start': 3458, 'end': 3469\},
+         \{'row\_start': 3470, 'end': 3479\},
+         \{'row\_start': 3480, 'end': 3490\},
+         \{'row\_start': 3491, 'end': 3502\},
+         \{'row\_start': 3503, 'end': 3513\},
+         \{'row\_start': 3514, 'end': 3524\},
+         \{'row\_start': 3525, 'end': 3534\},
+         \{'row\_start': 3535, 'end': 3544\},
+         \{'row\_start': 3545, 'end': 3555\},
+         \{'row\_start': 3556, 'end': 3565\},
+         \{'row\_start': 3566, 'end': 3575\},
+         \{'row\_start': 3576, 'end': 3585\},
+         \{'row\_start': 3586, 'end': 3595\},
+         \{'row\_start': 3596, 'end': 3605\},
+         \{'row\_start': 3606, 'end': 3615\},
+         \{'row\_start': 3616, 'end': 3625\},
+         \{'row\_start': 3626, 'end': 3636\},
+         \{'row\_start': 3637, 'end': 3647\},
+         \{'row\_start': 3648, 'end': 3657\},
+         \{'row\_start': 3658, 'end': 3666\},
+         \{'row\_start': 3667, 'end': 3675\},
+         \{'row\_start': 3676, 'end': 3685\},
+         \{'row\_start': 3686, 'end': 3693\},
+         \{'row\_start': 3694, 'end': 3704\},
+         \{'row\_start': 3705, 'end': 3716\},
+         \{'row\_start': 3717, 'end': 3727\},
+         \{'row\_start': 3728, 'end': 3739\},
+         \{'row\_start': 3740, 'end': 3750\},
+         \{'row\_start': 3751, 'end': 3760\},
+         \{'row\_start': 3761, 'end': 3770\},
+         \{'row\_start': 3771, 'end': 3781\},
+         \{'row\_start': 3782, 'end': 3792\},
+         \{'row\_start': 3793, 'end': 3805\},
+         \{'row\_start': 3806, 'end': 3816\},
+         \{'row\_start': 3817, 'end': 3827\},
+         \{'row\_start': 3828, 'end': 3843\},
+         \{'row\_start': 3844, 'end': 3857\},
+         \{'row\_start': 3858, 'end': 3869\},
+         \{'row\_start': 3870, 'end': 3880\},
+         \{'row\_start': 3881, 'end': 3892\},
+         \{'row\_start': 3893, 'end': 3901\},
+         \{'row\_start': 3902, 'end': 3912\},
+         \{'row\_start': 3913, 'end': 3923\},
+         \{'row\_start': 3924, 'end': 3933\},
+         \{'row\_start': 3934, 'end': 3945\},
+         \{'row\_start': 3946, 'end': 3958\},
+         \{'row\_start': 3959, 'end': 3974\},
+         \{'row\_start': 3975, 'end': 3989\},
+         \{'row\_start': 3990, 'end': 4001\},
+         \{'row\_start': 4002, 'end': 4016\},
+         \{'row\_start': 4017, 'end': 4031\},
+         \{'row\_start': 4032, 'end': 4045\},
+         \{'row\_start': 4046, 'end': 4057\},
+         \{'row\_start': 4058, 'end': 4073\},
+         \{'row\_start': 4074, 'end': 4089\},
+         \{'row\_start': 4090, 'end': 4104\},
+         \{'row\_start': 4105, 'end': 4118\},
+         \{'row\_start': 4119, 'end': 4133\},
+         \{'row\_start': 4134, 'end': 4151\},
+         \{'row\_start': 4152, 'end': 4167\},
+         \{'row\_start': 4168, 'end': 4184\},
+         \{'row\_start': 4185, 'end': 4205\},
+         \{'row\_start': 4206, 'end': 4225\},
+         \{'row\_start': 4226, 'end': 4246\},
+         \{'row\_start': 4247, 'end': 4259\},
+         \{'row\_start': 4260, 'end': 4271\},
+         \{'row\_start': 4272, 'end': 4284\},
+         \{'row\_start': 4285, 'end': 4298\},
+         \{'row\_start': 4299, 'end': 4310\},
+         \{'row\_start': 4311, 'end': 4322\},
+         \{'row\_start': 4323, 'end': 4335\},
+         \{'row\_start': 4336, 'end': 4351\},
+         \{'row\_start': 4352, 'end': 4364\},
+         \{'row\_start': 4365, 'end': 4374\},
+         \{'row\_start': 4375, 'end': 4388\},
+         \{'row\_start': 4389, 'end': 4399\},
+         \{'row\_start': 4400, 'end': 4413\},
+         \{'row\_start': 4414, 'end': 4429\},
+         \{'row\_start': 4430, 'end': 4443\},
+         \{'row\_start': 4444, 'end': 4455\},
+         \{'row\_start': 4456, 'end': 4468\},
+         \{'row\_start': 4469, 'end': 4483\},
+         \{'row\_start': 4484, 'end': 4495\},
+         \{'row\_start': 4496, 'end': 4508\},
+         \{'row\_start': 4509, 'end': 4521\},
+         \{'row\_start': 4522, 'end': 4532\},
+         \{'row\_start': 4533, 'end': 4546\},
+         \{'row\_start': 4547, 'end': 4565\},
+         \{'row\_start': 4566, 'end': 4585\},
+         \{'row\_start': 4586, 'end': 4601\},
+         \{'row\_start': 4602, 'end': 4619\},
+         \{'row\_start': 4620, 'end': 4638\},
+         \{'row\_start': 4639, 'end': 4659\},
+         \{'row\_start': 4660, 'end': 4677\},
+         \{'row\_start': 4678, 'end': 4692\},
+         \{'row\_start': 4693, 'end': 4706\},
+         \{'row\_start': 4707, 'end': 4719\},
+         \{'row\_start': 4720, 'end': 4736\},
+         \{'row\_start': 4737, 'end': 4751\},
+         \{'row\_start': 4752, 'end': 4764\},
+         \{'row\_start': 4765, 'end': 4781\},
+         \{'row\_start': 4782, 'end': 4797\},
+         \{'row\_start': 4798, 'end': 4812\},
+         \{'row\_start': 4813, 'end': 4826\},
+         \{'row\_start': 4827, 'end': 4839\},
+         \{'row\_start': 4840, 'end': 4855\},
+         \{'row\_start': 4856, 'end': 4867\},
+         \{'row\_start': 4868, 'end': 4880\},
+         \{'row\_start': 4881, 'end': 4892\},
+         \{'row\_start': 4893, 'end': 4907\},
+         \{'row\_start': 4908, 'end': 4924\},
+         \{'row\_start': 4925, 'end': 4938\},
+         \{'row\_start': 4939, 'end': 4955\},
+         \{'row\_start': 4956, 'end': 4968\},
+         \{'row\_start': 4969, 'end': 4981\},
+         \{'row\_start': 4982, 'end': 4994\},
+         \{'row\_start': 4995, 'end': 5008\},
+         \{'row\_start': 5009, 'end': 5021\},
+         \{'row\_start': 5022, 'end': 5032\},
+         \{'row\_start': 5033, 'end': 5043\},
+         \{'row\_start': 5044, 'end': 5055\},
+         \{'row\_start': 5056, 'end': 5069\},
+         \{'row\_start': 5070, 'end': 5084\},
+         \{'row\_start': 5085, 'end': 5099\},
+         \{'row\_start': 5100, 'end': 5114\},
+         \{'row\_start': 5115, 'end': 5130\},
+         \{'row\_start': 5131, 'end': 5144\},
+         \{'row\_start': 5145, 'end': 5160\},
+         \{'row\_start': 5161, 'end': 5171\},
+         \{'row\_start': 5172, 'end': 5184\},
+         \{'row\_start': 5185, 'end': 5203\},
+         \{'row\_start': 5204, 'end': 5222\},
+         \{'row\_start': 5223, 'end': 5241\},
+         \{'row\_start': 5242, 'end': 5255\},
+         \{'row\_start': 5256, 'end': 5272\},
+         \{'row\_start': 5273, 'end': 5287\},
+         \{'row\_start': 5288, 'end': 5307\},
+         \{'row\_start': 5308, 'end': 5322\},
+         \{'row\_start': 5323, 'end': 5335\},
+         \{'row\_start': 5336, 'end': 5353\},
+         \{'row\_start': 5354, 'end': 5368\},
+         \{'row\_start': 5369, 'end': 5384\},
+         \{'row\_start': 5385, 'end': 5398\},
+         \{'row\_start': 5399, 'end': 5414\},
+         \{'row\_start': 5415, 'end': 5433\},
+         \{'row\_start': 5434, 'end': 5449\},
+         \{'row\_start': 5450, 'end': 5467\},
+         \{'row\_start': 5468, 'end': 5485\},
+         \{'row\_start': 5486, 'end': 5500\},
+         \{'row\_start': 5501, 'end': 5514\},
+         \{'row\_start': 5515, 'end': 5531\},
+         \{'row\_start': 5532, 'end': 5545\},
+         \{'row\_start': 5546, 'end': 5560\},
+         \{'row\_start': 5561, 'end': 5575\},
+         \{'row\_start': 5576, 'end': 5588\},
+         \{'row\_start': 5589, 'end': 5601\},
+         \{'row\_start': 5602, 'end': 5612\},
+         \{'row\_start': 5613, 'end': 5622\},
+         \{'row\_start': 5623, 'end': 5634\},
+         \{'row\_start': 5635, 'end': 5647\},
+         \{'row\_start': 5648, 'end': 5661\},
+         \{'row\_start': 5662, 'end': 5672\},
+         \{'row\_start': 5673, 'end': 5682\},
+         \{'row\_start': 5683, 'end': 5694\},
+         \{'row\_start': 5695, 'end': 5702\},
+         \{'row\_start': 5703, 'end': 5710\},
+         \{'row\_start': 5711, 'end': 5720\},
+         \{'row\_start': 5721, 'end': 5732\},
+         \{'row\_start': 5733, 'end': 5743\},
+         \{'row\_start': 5744, 'end': 5756\},
+         \{'row\_start': 5757, 'end': 5769\},
+         \{'row\_start': 5770, 'end': 5784\},
+         \{'row\_start': 5785, 'end': 5799\},
+         \{'row\_start': 5800, 'end': 5811\},
+         \{'row\_start': 5812, 'end': 5826\},
+         \{'row\_start': 5827, 'end': 5844\},
+         \{'row\_start': 5845, 'end': 5864\},
+         \{'row\_start': 5865, 'end': 5881\},
+         \{'row\_start': 5882, 'end': 5896\},
+         \{'row\_start': 5897, 'end': 5909\},
+         \{'row\_start': 5910, 'end': 5922\},
+         \{'row\_start': 5923, 'end': 5933\},
+         \{'row\_start': 5934, 'end': 5950\},
+         \{'row\_start': 5951, 'end': 5962\},
+         \{'row\_start': 5963, 'end': 5978\},
+         \{'row\_start': 5979, 'end': 5996\},
+         \{'row\_start': 5997, 'end': 6015\},
+         \{'row\_start': 6016, 'end': 6032\},
+         \{'row\_start': 6033, 'end': 6051\},
+         \{'row\_start': 6052, 'end': 6067\},
+         \{'row\_start': 6068, 'end': 6081\},
+         \{'row\_start': 6082, 'end': 6094\},
+         \{'row\_start': 6095, 'end': 6107\},
+         \{'row\_start': 6108, 'end': 6119\},
+         \{'row\_start': 6120, 'end': 6132\},
+         \{'row\_start': 6133, 'end': 6145\},
+         \{'row\_start': 6146, 'end': 6161\},
+         \{'row\_start': 6162, 'end': 6173\},
+         \{'row\_start': 6174, 'end': 6185\},
+         \{'row\_start': 6186, 'end': 6197\},
+         \{'row\_start': 6198, 'end': 6213\},
+         \{'row\_start': 6214, 'end': 6227\},
+         \{'row\_start': 6228, 'end': 6237\},
+         \{'row\_start': 6238, 'end': 6248\},
+         \{'row\_start': 6249, 'end': 6259\},
+         \{'row\_start': 6260, 'end': 6272\},
+         \{'row\_start': 6273, 'end': 6285\},
+         \{'row\_start': 6286, 'end': 6298\},
+         \{'row\_start': 6299, 'end': 6312\},
+         \{'row\_start': 6313, 'end': 6322\},
+         \{'row\_start': 6323, 'end': 6334\},
+         \{'row\_start': 6335, 'end': 6345\},
+         \{'row\_start': 6346, 'end': 6358\},
+         \{'row\_start': 6359, 'end': 6368\},
+         \{'row\_start': 6369, 'end': 6378\},
+         \{'row\_start': 6379, 'end': 6390\},
+         \{'row\_start': 6391, 'end': 6405\},
+         \{'row\_start': 6406, 'end': 6419\},
+         \{'row\_start': 6420, 'end': 6432\},
+         \{'row\_start': 6433, 'end': 6444\},
+         \{'row\_start': 6445, 'end': 6453\},
+         \{'row\_start': 6454, 'end': 6464\},
+         \{'row\_start': 6465, 'end': 6473\},
+         \{'row\_start': 6474, 'end': 6486\},
+         \{'row\_start': 6487, 'end': 6498\},
+         \{'row\_start': 6499, 'end': 6511\},
+         \{'row\_start': 6512, 'end': 6522\},
+         \{'row\_start': 6523, 'end': 6538\},
+         \{'row\_start': 6539, 'end': 6552\},
+         \{'row\_start': 6553, 'end': 6567\},
+         \{'row\_start': 6568, 'end': 6580\},
+         \{'row\_start': 6581, 'end': 6593\},
+         \{'row\_start': 6594, 'end': 6604\},
+         \{'row\_start': 6605, 'end': 6612\},
+         \{'row\_start': 6613, 'end': 6620\},
+         \{'row\_start': 6621, 'end': 6628\},
+         \{'row\_start': 6629, 'end': 6637\},
+         \{'row\_start': 6638, 'end': 6648\},
+         \{'row\_start': 6649, 'end': 6662\},
+         \{'row\_start': 6663, 'end': 6672\},
+         \{'row\_start': 6673, 'end': 6682\},
+         \{'row\_start': 6683, 'end': 6691\},
+         \{'row\_start': 6692, 'end': 6700\},
+         \{'row\_start': 6701, 'end': 6708\},
+         \{'row\_start': 6709, 'end': 6715\},
+         \{'row\_start': 6716, 'end': 6723\},
+         \{'row\_start': 6724, 'end': 6734\},
+         \{'row\_start': 6735, 'end': 6744\},
+         \{'row\_start': 6745, 'end': 6752\},
+         \{'row\_start': 6753, 'end': 6759\},
+         \{'row\_start': 6760, 'end': 6766\},
+         \{'row\_start': 6767, 'end': 6774\},
+         \{'row\_start': 6775, 'end': 6783\},
+         \{'row\_start': 6784, 'end': 6789\},
+         \{'row\_start': 6790, 'end': 6796\},
+         \{'row\_start': 6797, 'end': 6802\},
+         \{'row\_start': 6803, 'end': 6809\},
+         \{'row\_start': 6810, 'end': 6817\},
+         \{'row\_start': 6818, 'end': 6824\},
+         \{'row\_start': 6825, 'end': 6833\},
+         \{'row\_start': 6834, 'end': 6841\},
+         \{'row\_start': 6842, 'end': 6849\},
+         \{'row\_start': 6850, 'end': 6857\},
+         \{'row\_start': 6858, 'end': 6863\},
+         \{'row\_start': 6864, 'end': 6869\},
+         \{'row\_start': 6870, 'end': 6874\},
+         \{'row\_start': 6875, 'end': 6879\},
+         \{'row\_start': 6880, 'end': 6885\},
+         \{'row\_start': 6886, 'end': 6892\},
+         \{'row\_start': 6893, 'end': 6897\},
+         \{'row\_start': 6898, 'end': 6904\},
+         \{'row\_start': 6905, 'end': 6910\},
+         \{'row\_start': 6911, 'end': 6917\},
+         \{'row\_start': 6918, 'end': 6926\},
+         \{'row\_start': 6927, 'end': 6933\},
+         \{'row\_start': 6934, 'end': 6942\},
+         \{'row\_start': 6943, 'end': 6952\},
+         \{'row\_start': 6953, 'end': 6959\},
+         \{'row\_start': 6960, 'end': 6966\},
+         \{'row\_start': 6967, 'end': 6974\},
+         \{'row\_start': 6975, 'end': 6982\},
+         \{'row\_start': 6983, 'end': 6994\},
+         \{'row\_start': 6995, 'end': 7005\},
+         \{'row\_start': 7006, 'end': 7014\},
+         \{'row\_start': 7015, 'end': 7023\},
+         \{'row\_start': 7024, 'end': 7034\},
+         \{'row\_start': 7035, 'end': 7043\},
+         \{'row\_start': 7044, 'end': 7051\},
+         \{'row\_start': 7052, 'end': 7061\},
+         \{'row\_start': 7062, 'end': 7079\},
+         \{'row\_start': 7080, 'end': 7092\},
+         \{'row\_start': 7093, 'end': 7107\},
+         \{'row\_start': 7108, 'end': 7121\},
+         \{'row\_start': 7122, 'end': 7136\},
+         \{'row\_start': 7137, 'end': 7151\}]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
