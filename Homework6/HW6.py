@@ -44,15 +44,24 @@ def Yokoi(img_array):
     return img_yok    
 
 def output_Yokoi(img_yok):
-    with open('Output.txt','w') as file:
+    with open('Output_ver1.txt','w') as file:
         length = img_yok.shape[0]
         for i in range(length):
             for j in range(length):
                 if(img_yok[i][j] == 0):
-                    file.write("  ") 
+                    file.write("  ")
                 else:
                     file.write(str(img_yok[i][j])+" ")
-            file.write('\n')        
+        file.write('\n')
+    with open('Output_ver2.txt','w') as file:
+        length = img_yok.shape[0]
+        for i in range(length):
+            for j in range(length):
+                if(img_yok[i][j] == 0):
+                    file.write(" ")
+                    else:
+                        file.write(str(img_yok[i][j]))
+            file.write('\n')
 
 
 def main():
@@ -65,7 +74,7 @@ def main():
     img_d_array = np.uint8(down_sample(img_b_array,8,8))
     img_yok = np.uint8(Yokoi(img_d_array))
     output_Yokoi(img_yok)
-    print('Done, the yokoi file is in your Output.txt!')
+    print('Done, the yokoi file is in your Output_ver1.txt and Output_ve2.txt !')
 
 if __name__ == '__main__':
     main()
