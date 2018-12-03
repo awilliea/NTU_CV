@@ -23,7 +23,7 @@ def Yokoi(img_array):
     img_temp = np.zeros((length+2,length+2))
     img_temp[1:length+1,1:length+1] += img_array
     
-    img_yok = np.zeros((length,length))
+    img_yok = np.zeros((length,length))-1
     dic = {'q':0,'r':0,'s':0}
     
     for i in range(1,length+1,1):
@@ -48,7 +48,7 @@ def output_Yokoi(img_yok):
         length = img_yok.shape[0]
         for i in range(length):
             for j in range(length):
-                if(img_yok[i][j] == 0):
+                if(img_yok[i][j] == -1):
                     file.write("  ")
                 else:
                     file.write(str(img_yok[i][j])+" ")
@@ -57,7 +57,7 @@ def output_Yokoi(img_yok):
         length = img_yok.shape[0]
         for i in range(length):
             for j in range(length):
-                if(img_yok[i][j] == 0):
+                if(img_yok[i][j] == -1):
                     file.write(" ")
                     else:
                         file.write(str(img_yok[i][j]))
@@ -72,7 +72,7 @@ def main():
 
     img_b_array = np.uint8(np.copy(img_array)>=128)*255
     img_d_array = np.uint8(down_sample(img_b_array,8,8))
-    img_yok = np.uint8(Yokoi(img_d_array))
+    img_yok = np.int8(Yokoi(img_d_array))
     output_Yokoi(img_yok)
     print('Done, the yokoi file is in your Output_ver1.txt and Output_ve2.txt !')
 
